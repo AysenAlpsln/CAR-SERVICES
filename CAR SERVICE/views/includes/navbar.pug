@@ -1,0 +1,34 @@
+block styles
+    link(rel="stylesheet" href="/css/style.css")
+
+nav.navbar.navbar-expand-lg.navbar-light
+    .container
+        a(href="/").navbar-brand
+            img(src="/img/autotech-logo.png" alt="" width="120px")
+        ul.navbar-nav.mr-auto
+
+            if isAuthenticated
+
+                if isAdmin
+                    li.nav-item
+                        a(href="/admin/cars", class=(path === '/admin/cars'?'nav-link active':'nav-link')) Araçlar
+
+                    li.nav-item
+                        a(href="/admin/add-car", class=(path === '/add-car'?'nav-link active':'nav-link')) Araç Ekle
+
+                    li.nav-item
+                        a(href="/admin/services", class=(path === '/services'?'nav-link active':'nav-link')) Servis İşlemleri
+                else
+                    li.nav-item
+                        a(href="/search", class=(path === '/search'?'nav-link active':'nav-link')) Plaka Sorgula 
+
+        ul.navbar-nav.ml-auto
+            if isAuthenticated
+                li.nav-item
+                    a.nav-link(href="/logout") Çıkış
+            else
+                li.nav-item
+                    a.nav-link(href="/login") Giriş Yap
+                        
+                li.nav-item
+                    a.nav-link(href="/register") Kayıt Ol 

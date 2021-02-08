@@ -1,0 +1,41 @@
+extends ../layouts/main-layout.pug
+
+block content 
+    if (action !== 'undefined' && action === 'delete')
+        div.alert.alert-danger Araç kaydı silindi.
+
+    if (action !== 'undefined' && action === 'edit')
+        div.alert.alert-success Araç bilgileri güncellendi.
+    
+    
+    if cars.length > 0
+        table.table.table-striped
+            thead
+                tr
+                    th(style="width:150px;") Plaka
+                    th Model
+                    th Müşteri Bilgisi
+                    th Kilometre
+                    th(style="width:170px;")
+            tbody
+                each car in cars
+                    tr
+                        
+                        td #{car.plate}
+                        td #{car.model}
+                        td #{car.customer}
+                        td #{car.km} KM
+                        td 
+                            a.btn.btn-info.mr-2(href=`/admin/add-service/${car._id}`)
+                                i.fas.fa-car
+
+                            a.btn.btn-primary.mr-2(href=`/admin/cars/${car._id}`)
+                                i.far.fa-edit
+
+                            form(action='/admin/delete-car' method='POST')
+                                input(type='hidden' name='_csrf' value=`${csrfToken}`)
+                                input(type='hidden' name='carid' value=`${car._id}`)
+                                button(type='submit').btn.btn-danger.btn-submit
+                                    i.far.fa-trash-alt
+    else
+        h1 Henüz bir araç kaydı yoktur.                        

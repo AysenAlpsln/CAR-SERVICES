@@ -1,0 +1,31 @@
+extends ../layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet" href="/css/forms.css")
+
+block content
+    form(action = "/admin/add-car" method= "POST")
+        input(type="hidden" name="_csrf" value=`${csrfToken}`)
+        .form-group.row
+            label(for="plate").col-sm-2.col-form-label Plaka
+            .col-sm-10
+                input.form-control#plate(type="text" name="plate")  
+
+        .form-group.row
+            label(for="model").col-sm-2.col-form-label Model
+            .col-sm-10
+                input.form-control#model(type="text" name="model") 
+
+        .form-group.row
+            label(for="customer").col-sm-2.col-form-label Müşteri Bilgisi
+            .col-sm-10
+                input.form-control#customer(type="text" name="customer")
+
+        .form-group.row
+            label(for="km").col-sm-2.col-form-label Kilometre
+            .col-sm-10
+                input.form-control#km(type="text" name="km")
+
+        .form-group.row
+            .col-sm-10.offset-sm-2
+                input(type="submit" value="Aracı Kaydet").btn.btn-info
